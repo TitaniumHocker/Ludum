@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+  <div class="container">
+    {% for category in categories %}
+    <h3><p class="mt-2">{{ category.title  }}</p></h3>
+    <div class="row">
+      {% for task in tasks_by_categories[category.title] %}
+        <div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-2">
+          <a class="my-card" href="{{ url_for('task_page', slug=task['slug']) }}">
+            <div class="card" style="max-width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">{{ task['title'] }}</h5>
+                <p class="card-text">{{ task['body'][:75:] }}...</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+
+{% endblock %}

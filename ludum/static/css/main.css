@@ -1,0 +1,5 @@
+a.my-card,
+a.my-card:hover {
+    color: inherit;
+    text-decoration: none;
+}

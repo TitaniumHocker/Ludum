@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block main %}
+  
+  <div class="container mt-4">
+    <div class="row mx-auto">
+      <div class="col-md-6 col-12 mx-auto">
+        {{ alert|safe }}
+          {% for category in task['categories'] %}
+            <span class="badge badge-info">{{ category.title }}</span>
+          {% endfor %}
+        <h4 class="display-4 text-center"> {{ task['title'] }}</h2>
+        <p>{{ task['body']|safe }}</p>
+        <form class="form-inline justify-content-center" method="POST" action="{{ url_for('task_page', slug=task['slug']) }}">
+          <div class="form-group mb-2 mx-2 justify-content-center">
+            <input name="answ" class="form-control" placeholder="Ответ" required>
+            <div class="mx-1 my-1"></div>
+            <button type="submit" class="btn btn-primary">Отправить</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
