@@ -9,7 +9,7 @@
           {% for category in task['categories'] %}
             <span class="badge badge-info">{{ category.title }}</span>
           {% endfor %}
-        <h4 class="display-4 text-center"> {{ task['title'] }}</h2>
+        <h4 class="display-4 text-center"> {{ task['title'] }}</h4>
         <p>{{ task['body']|safe }}</p>
         <form method="POST" action="{{ url_for('task_page', slug=task['slug']) }}">
           <div class="form-row mx-auto">

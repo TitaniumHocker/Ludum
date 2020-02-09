@@ -136,3 +136,6 @@ development.db
 
 # migrations dir
 migrations/
+
+# NGINX Unit config file
+unit.json
