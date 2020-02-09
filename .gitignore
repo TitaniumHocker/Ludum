@@ -133,3 +133,6 @@ db.sqlite
 db.sqlite3
 dev.db
 development.db
+
+# migrations dir
+migrations/
