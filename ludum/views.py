@@ -18,13 +18,24 @@ def generate_alert(alert_type, message):
     </div>
     '''
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index_page():
-    return render_template('index.html', page_title='Mainpage')
+    if request.method == 'GET':
+        return render_template('index.html', page_title='mainpage')
+    answ = request.form.get('answ', '')
+    task = Task.query.filter(Task.title=='final').first_or_404()
+    if answ == task.answer:
+        return render_template('index.html',
+                page_title='mainpage',
+                alert=generate_alert('success',
+                    f'Ответ верный, лови: {task.reward}'))
+    return render_template('index.html',
+            page_title='mainpage',
+            alert=generate_alert('danger',
+                f'Ответ неверный, ищи лучше.'))
 
 @app.route('/tasks')
 def tasks_page():
-    print(request.path)
     tasks = [task.properties for task in Task.query.all()]
     categories = [category for category in Category.query.all()]
     tasks_by_categories = {}
@@ -48,11 +59,12 @@ def task_page(slug):
         return render_template('task.html',
                 page_title=task.title,
                 task=task.properties,
-                alert=generate_alert('success', f'Ответ верный, часть ключа: {task.reward}'))
+                alert=generate_alert('success', f'Ответ верный, лови: {task.reward}'))
     return render_template('task.html',
             page_title=task.title,
             task=task.properties,
             alert=generate_alert('danger', 'Ответ неверный, ищи лучше.'))
 
-
-
+@app.errorhandler(404)
+def not_found_page(e):
+    return render_template('404.html', page_title='404')

@@ -11,11 +11,14 @@
           {% endfor %}
         <h4 class="display-4 text-center"> {{ task['title'] }}</h2>
         <p>{{ task['body']|safe }}</p>
-        <form class="form-inline justify-content-center" method="POST" action="{{ url_for('task_page', slug=task['slug']) }}">
-          <div class="form-group mb-2 mx-2 justify-content-center">
-            <input name="answ" class="form-control" placeholder="Ответ" required>
-            <div class="mx-1 my-1"></div>
-            <button type="submit" class="btn btn-primary">Отправить</button>
+        <form method="POST" action="{{ url_for('task_page', slug=task['slug']) }}">
+          <div class="form-row mx-auto">
+            <div class="col-lg-8">
+              <input name="answ" class="form-control my-1" placeholder="Ответ" required>
+            </div>
+            <div class="col-lg-4">
+              <button type="submit" class="btn btn-block btn-primary my-1">Отправить</button>
+            </div>
           </div>
         </form>
       </div>
